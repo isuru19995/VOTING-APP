@@ -5,12 +5,28 @@ import CreateElectionForm from "./components/CreateElectionForm.jsx";
 import ElectionCard from "./components/ElectionCard.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 
+const featureGuides = {
+  voters: {
+    title: "Registered voters",
+    description: "Each election has its own voter registration. Share your public wallet address with the organiser, who can register it using the election card. Never share your private key or recovery phrase.",
+  },
+  activity: {
+    title: "On-chain activity",
+    description: "Open an election card and select ‘Show on-chain audit log’ to inspect voter registrations, votes and vote changes. Transaction links let you inspect the recorded activity. Voting transactions are public, not anonymous.",
+  },
+  results: {
+    title: "Transparent results",
+    description: "Each election card shows candidate totals and vote percentages. A changed vote moves your existing vote to another candidate rather than adding a second vote. Once the deadline passes, voting closes.",
+  },
+};
+
 export default function App() {
   const { account, contract, chainId, error, connecting, hasMetaMask, connect } =
     useVotingContract();
 
   const [electionIds, setElectionIds] = useState([]);
   const [isOrganiser, setIsOrganiser] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(null);
   const [totalVotesAcrossAll, setTotalVotesAcrossAll] = useState(0);
 
   const refreshElections = useCallback(async () => {
@@ -43,9 +59,9 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div>
-          <h1>Decentralized Voting System</h1>
+          <div className="brand"><span className="brand-mark" aria-hidden="true">✓</span><h1>Vote<span className="brand-accent">Space</span></h1></div>
           <p className="muted">
-            DAS5003 Blockchain Fundamentals · Section 3 (PRAC1) — Option B
+            DECENTRALIZED VOTING · DAS5003
           </p>
         </div>
         <div className="wallet-bar">
@@ -71,6 +87,51 @@ export default function App() {
         </div>
       </header>
 
+      <section className="hero">
+        <div className="hero-copy">
+          <span className="eyebrow">YOUR VOICE. ON THE BLOCKCHAIN.</span>
+          <h2>Make your choice.<br /><span>Make it count.</span></h2>
+          <p>Create elections, cast your vote and explore transparent results. A shared space for decisions that everyone can verify.</p>
+          <div className="hero-tags" aria-label="Voting feature guides">
+            {Object.entries(featureGuides).map(([key, feature]) => (
+              <button
+                key={key}
+                type="button"
+                aria-expanded={activeFeature === key}
+                aria-controls="feature-guide"
+                onClick={() => setActiveFeature(activeFeature === key ? null : key)}
+              >
+                {feature.title}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="hero-aside">
+          <div className="ballot-symbol" aria-hidden="true">✓</div>
+          <span className="network-label">{DEPLOYMENT_NETWORK} network</span>
+          <strong>{account ? "Your wallet is connected" : "Your next decision starts here"}</strong>
+          <p>{account ? "Explore elections below. Your wallet signs every voting transaction." : "Connect MetaMask to explore elections and participate with an approved address."}</p>
+          <span className="test-note">Test-network demo · Votes are public</span>
+        </div>
+      </section>
+
+      <section id="feature-guide" className="card feature-guide" hidden={!activeFeature} aria-live="polite">
+        {activeFeature && (
+          <>
+            <div className="section-heading">
+              <h2>{featureGuides[activeFeature].title}</h2>
+              <button type="button" className="ghost small" onClick={() => setActiveFeature(null)}>Close guide</button>
+            </div>
+            <p>{featureGuides[activeFeature].description}</p>
+            {contract ? (
+              <a className="tx-link" href="#elections">Go to elections →</a>
+            ) : (
+              <p className="notice">{hasMetaMask ? "Connect MetaMask above to view election data." : "Open this app in a browser with MetaMask to view election data."}</p>
+            )}
+          </>
+        )}
+      </section>
+
       {error && <p className="error banner">{error}</p>}
 
       {contract && (
@@ -81,9 +142,10 @@ export default function App() {
             <CreateElectionForm contract={contract} onCreated={refreshElections} />
           )}
 
-          <section className="elections-grid">
+          <section id="elections" className="elections-grid">
+            <div className="section-heading"><div><span className="eyebrow">COMMUNITY DECISIONS</span><h2>Explore elections</h2></div><span className="count-label">{electionIds.length} elections</span></div>
             {electionIds.length === 0 && (
-              <p className="muted">No elections created yet.</p>
+              <div className="empty-state"><h3>A fresh start for your community</h3><p>No elections yet. An authorised organiser can create the first one.</p></div>
             )}
             {electionIds
               .slice()
@@ -96,11 +158,12 @@ export default function App() {
       )}
 
       {!contract && !error && (
-        <p className="muted">
+        <p className="connection-hint">
           Connect your wallet to view elections{DEPLOYMENT_NETWORK !== "not-deployed-yet" &&
             ` on ${DEPLOYMENT_NETWORK}`}.
         </p>
       )}
+      <footer className="app-footer"><span>VoteSpace / Blockchain Fundamentals</span><span>Sepolia demo · Never use real funds</span></footer>
     </div>
   );
 }

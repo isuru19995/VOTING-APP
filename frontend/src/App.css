@@ -282,3 +282,108 @@ label {
   margin-left: 8px;
   text-decoration: none;
 }
+
+/* VoteSpace: calm surfaces, deep navy and accessible teal accents. */
+:root {
+  --bg: #f3f6f8;
+  --panel: #ffffff;
+  --panel-border: #dce5eb;
+  --text: #172e40;
+  --muted: #617384;
+  --accent: #087f76;
+  --accent-soft: #e0f3ef;
+  --good: #08754d;
+  --warn: #78520d;
+  --bad: #b33039;
+  --radius: 18px;
+}
+body { line-height: 1.6; }
+.app { max-width: 1200px; padding: 32px 28px 28px; }
+.app-header { margin-bottom: 32px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand h1 { margin: 0; font-size: 1.65rem; letter-spacing: -1px; }
+.brand-accent { color: var(--accent); }
+.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 12px; font-size: 24px; }
+.app-header p { margin: 7px 0 0; font-size: .67rem; letter-spacing: 1.6px; }
+button { font-weight: 600; min-height: 42px; transition: background .2s, transform .2s; }
+button:not(:disabled):hover { background: #06665f; transform: translateY(-1px); }
+button.ghost:not(:disabled):hover { background: var(--accent-soft); }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #298bc4; outline-offset: 3px; }
+.hero { display: grid; grid-template-columns: 1.55fr 1fr; background: #102c40; color: white; border-radius: 24px; overflow: hidden; margin-bottom: 28px; }
+.hero-copy { padding: 44px; }
+.eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: 1.8px; color: var(--accent); }
+.hero .eyebrow { color: #8ddccc; }
+.hero h2 { font-size: clamp(2rem, 4vw, 3.3rem); line-height: 1.12; letter-spacing: -1.7px; margin: 20px 0; }
+.hero h2 span { color: #88decc; }
+.hero-copy p { color: #c7d8e4; font-size: .94rem; max-width: 470px; }
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 25px; }
+.hero-tags span { border: 1px solid #416071; border-radius: 30px; padding: 5px 10px; font-size: .68rem; color: #dce9ef; }
+.hero-tags button { border: 1px solid #698995; border-radius: 30px; padding: 8px 14px; font-size: .75rem; color: #edf8fa; background: transparent; min-height: 44px; }
+.hero-tags button:not(:disabled):hover, .hero-tags button[aria-expanded="true"] { background: #245564; border-color: #9aead5; color: white; }
+.feature-guide { border-left: 4px solid var(--accent); }
+.feature-guide .section-heading { margin: 0; }
+.feature-guide p { color: var(--muted); }
+#elections { scroll-margin-top: 24px; }
+.hero-aside { background: linear-gradient(135deg, #164b54, #103a47); padding: 36px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.ballot-symbol { width: 72px; height: 72px; display: grid; place-items: center; font-size: 42px; color: #9aead5; background: #ffffff0d; border: 1px solid #ffffff30; border-radius: 22px; margin-bottom: 22px; transform: rotate(-8deg); }
+.network-label { text-transform: uppercase; color: #9aead5; font-size: .65rem; letter-spacing: 2px; margin-bottom: 10px; }
+.hero-aside strong { font-size: 1.2rem; line-height: 1.4; }
+.hero-aside p { color: #c2d9df; font-size: .84rem; }
+.test-note { color: #b5d6d7; font-size: .69rem; }
+.card { padding: 28px; box-shadow: 0 5px 18px #17354804; margin-bottom: 24px; }
+.dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; background: transparent; border: 0; padding: 0; box-shadow: none; }
+.stat { background: white; border: 1px solid var(--panel-border); border-top: 3px solid var(--accent); border-radius: 14px; padding: 20px 26px; }
+.stat:nth-child(2) { border-top-color: #4283b0; }
+.stat-value { font-size: 2.2rem; letter-spacing: -1px; }
+.card h2 { margin: 7px 0 10px; font-size: 1.4rem; letter-spacing: -.5px; }
+input { background: #f8fafb; padding: 12px 14px; min-height: 46px; font-family: inherit; min-width: 0; }
+input::placeholder { color: #718392; }
+label { font-weight: 600; color: #41586b; margin-bottom: 16px; }
+.two-col { margin-top: 18px; }
+.option-row button { flex-shrink: 0; }
+.account-pill { border: 1px solid #c3e3dc; overflow-wrap: anywhere; }
+.notice { background: #fff5df; padding: 12px 16px; }
+.error.banner { background: #fff0f0; border: 1px solid #f0c5c8; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; margin: 12px 0 0; gap: 12px; }
+.section-heading h2 { margin: 4px 0; font-size: 1.55rem; letter-spacing: -.6px; }
+.count-label { font-size: .8rem; color: var(--muted); }
+.elections-grid { gap: 16px; }
+.election-card { margin: 0; }
+.election-header { gap: 16px; }
+.election-card h3 { font-size: 1.17rem; }
+.status-pill { flex-shrink: 0; font-size: .65rem; font-weight: 700; padding: 5px 12px; }
+.status-open { background: #e0f4e9; }
+.status-upcoming { background: #e8f0fa; color: #315f91; }
+.status-closed { background: #edf0f3; color: #526476; }
+.result-row { background: #f7f9fb; border: 1px solid #e6edf1; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+.result-label { font-weight: 600; gap: 12px; margin-bottom: 8px; }
+.bar-track { background: #e1e9ee; height: 8px; }
+.bar-fill { background: linear-gradient(90deg, #087f76, #43b49e); }
+.vote-btn { margin-top: 12px; }
+.register-voter { margin: 20px 0 14px; }
+.register-voter button { min-width: 130px; }
+.audit-log { background: #f8fafb; padding: 12px 16px; border-radius: 12px; }
+.audit-log li { padding: 10px 0; overflow-wrap: anywhere; }
+.empty-state, .connection-hint { text-align: center; background: white; border: 1px dashed #bdccd6; border-radius: 16px; padding: 32px; color: var(--muted); }
+.empty-state h3 { color: var(--text); margin: 0; }
+.app-footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--panel-border); margin-top: 42px; padding-top: 20px; font-size: .73rem; color: var(--muted); }
+@media (max-width: 760px) {
+  .app { padding: 22px 16px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-copy, .hero-aside { padding: 28px; }
+  .hero-aside { border-top: 1px solid #ffffff20; }
+  .ballot-symbol { display: none; }
+  .hero h2 { font-size: 2.4rem; }
+  .dashboard { gap: 12px; }
+  .stat { padding: 16px; }
+  .card { padding: 20px; }
+  .two-col { grid-template-columns: 1fr; gap: 0; }
+  .election-card .election-header { flex-wrap: wrap; }
+  .result-label { flex-wrap: wrap; }
+  .register-voter { flex-direction: column; }
+  .app-footer { flex-direction: column; }
+  .wallet-bar { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
