@@ -1,7 +1,7 @@
 {
-  "network": "not-deployed-yet",
-  "address": "0x0000000000000000000000000000000000000000",
-  "deployer": null,
+  "network": "sepolia",
+  "address": "0xa96AbDbf057758f14DC61a65c6432fb29b07558f",
+  "deployer": "0x884cEdad114DC061D8B7011c2657C1537c93Cd27",
   "abi": [
     {
       "inputs": [],
@@ -538,5 +538,5 @@
       "type": "function"
     }
   ],
-  "deployedAt": null
+  "deployedAt": "2026-08-27T10:33:37.475Z"
 }
